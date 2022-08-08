@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
+using LoggerService;
+using Contracts;
 
 namespace CompanyEmployees.Extensions
 {
@@ -25,6 +27,11 @@ namespace CompanyEmployees.Extensions
                 options.AutomaticAuthentication = true;
                 options.AuthenticationDisplayName = "Ollarius";
             });
+        }
+
+        public static void ConfigureLoggerService(this IServiceCollection services) 
+        {
+            services.AddScoped<ILoggerManager, LoggerManager>();
         }
     }
 }
