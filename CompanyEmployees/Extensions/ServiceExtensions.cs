@@ -2,6 +2,9 @@
 using Microsoft.Extensions.DependencyInjection;
 using LoggerService;
 using Contracts;
+using Microsoft.Extensions.Configuration;
+using Entities;
+using Microsoft.EntityFrameworkCore;;
 
 namespace CompanyEmployees.Extensions
 {
@@ -33,5 +36,9 @@ namespace CompanyEmployees.Extensions
         {
             services.AddScoped<ILoggerManager, LoggerManager>();
         }
+
+        public static void ConfigureSqlContext(this IServiceCollection services, IConfiguration configuration) =>
+            services.AddDbContext<RepositoryContext>(opts =>
+                opts.UseSqlServer(configuration.GetConnectionString("sqlConnection")));
     }
 }
