@@ -1,4 +1,5 @@
-﻿using Entities.Models;
+﻿using Entities.Configuration;
+using Entities.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace Entities
@@ -11,5 +12,12 @@ namespace Entities
 
         public DbSet<Company> Companies { get; set; }
         public DbSet<Employee> Employees { get; set; }
+
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            builder.ApplyConfiguration<Company>(new CompanyConfiguration());
+            builder.ApplyConfiguration<Employee>(new EmployeeConfiguration());
+        }
     }
 }

@@ -4,7 +4,7 @@ using LoggerService;
 using Contracts;
 using Microsoft.Extensions.Configuration;
 using Entities;
-using Microsoft.EntityFrameworkCore;;
+using Microsoft.EntityFrameworkCore;
 
 namespace CompanyEmployees.Extensions
 {
@@ -39,6 +39,7 @@ namespace CompanyEmployees.Extensions
 
         public static void ConfigureSqlContext(this IServiceCollection services, IConfiguration configuration) =>
             services.AddDbContext<RepositoryContext>(opts =>
-                opts.UseSqlServer(configuration.GetConnectionString("sqlConnection")));
+                opts.UseSqlServer(configuration.GetConnectionString("sqlConnection"), b =>
+                b.MigrationsAssembly("CompanyEmployees"))); 
     }
 }
